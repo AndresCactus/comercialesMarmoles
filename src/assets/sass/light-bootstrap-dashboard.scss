@@ -1,0 +1,81 @@
+/*!
+ =========================================================
+ * Light Bootstrap Dashboard Vue - v1.0.0 (Bootstrap 4)
+ =========================================================
+ * Product Page: http://www.creative-tim.com/product/light-bootstrap-dashboard
+ * Copyright 2017 Creative Tim (http://www.creative-tim.com)
+ * Licensed under MIT (https://github.com/creativetimofficial/light-bootstrap-dashboard/blob/master/LICENSE.md)
+ =========================================================
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ */
+@import "lbd/variables";
+@import "lbd/mixins";
+
+@import "lbd/typography";
+
+// Core CSS
+@import "lbd/misc";
+@import "lbd/sidebar-and-main-panel";
+@import "lbd/buttons";
+@import "lbd/inputs";
+
+@import "lbd/alerts";
+@import "lbd/tables";
+@import "lbd/modal";
+
+@import "lbd/checkbox-radio-switch";
+@import "lbd/navbars";
+@import "lbd/footers";
+
+// Fancy Stuff
+@import "lbd/plugins/animate";
+@import "lbd/dropdown";
+@import "lbd/cards";
+@import "lbd/chartist";
+@import "lbd/tooltip";
+@import "lbd/responsive";
+
+
+//Agrego mi codico SCSS
+
+.logo-img{
+    width: 40px;
+    display: inline-block;
+    height: 40px;
+    margin-left: 0px;
+    margin-right: 10px;
+    background: transparent !important;
+    border-radius: 0% !important;
+    text-align: center;
+
+  img{
+      max-width: 40px !important;
+  }
+}
+
+.main-panel{
+    background-image: url("../../../static/img/background-image.jpg") !important;
+}
+
+table.vgt-table{
+    background-color: white !important;
+    font-size: 1vmax;
+    white-space: nowrap;
+}
+
+.vgt-responsive{
+    border-radius: 10px 10px 0 0;
+}
+
+.vgt-wrap__footer{
+    border-radius: 0 0 10px 10px;
+}
+
+.vgt-table.bordered td, .vgt-table.bordered th{
+    border-top: 0px;
+    border-bottom: 0px;
+}
+
+.vgt-input, .vgt-select{
+    font-size: 1vmax;
+}
