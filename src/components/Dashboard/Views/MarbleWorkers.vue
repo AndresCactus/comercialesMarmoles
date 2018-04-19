@@ -1,67 +1,52 @@
 <template>
-  <div>
-    <vue-good-table
-      :columns="columns"
-      :rows="rows"
-      :pagination-options="{
-        enabled: true,
-        perPage: 5,
-      }"
-      styleClass="vgt-table striped bordered"/>
+  <div class="content">
+    <div class="container-fluid">
+
+      <table-data v-bind:rows="rows"></table-data>
+
+    </div>
   </div>
 </template>
  
 <script>
-export default {
-  name: 'my-component',
-  data(){
+  import TableData from './Tables/TableData.vue'
+
+  export default {
+    components: {
+      TableData
+    },
+    data(){
     return {
-      columns: [
-        {
-          label: 'Name',
-          field: 'name',
-          filterOptions: {
-            enabled: true,
-          },
-        },
-        {
-          label: 'Age',
-          field: 'age',
-          type: 'number',
-          filterOptions: {
-            enabled: true,
-          },
-        },
-        {
-          label: 'Created On',
-          field: 'createdAt',
-          type: 'date',
-          dateInputFormat: 'YYYY-MM-DD',
-          dateOutputFormat: 'MMM Do YY',
-          filterOptions: {
-            enabled: true,
-          },
-        },
-        {
-          label: 'Percent',
-          field: 'score',
-          type: 'percentage',
-          filterOptions: {
-            enabled: true,
-          },
-        },
-      ],
       rows: [
-        { id:1, name:"John", age: 20, createdAt: '201-10-31:9: 35 am',score: 0.03343 },
-        { id:2, name:"Jane", age: 24, createdAt: '2011-10-31', score: 0.03343 },
-        { id:3, name:"Susan", age: 16, createdAt: '2011-10-30', score: 0.03343 },
-        { id:4, name:"Chris", age: 55, createdAt: '2011-10-11', score: 0.03343 },
-        { id:5, name:"Dan", age: 40, createdAt: '2011-10-21', score: 0.03343 },
-        { id:6, name:"John", age: 20, createdAt: '2011-10-31', score: 0.03343 },
-        { id:7, name:"Jane", age: 24, createdAt: '20111031' },
-        { id:8, name:"Susan", age: 16, createdAt: '2013-10-31', score: 0.03343 },
+        { name:"Carmen Villalobos", client:"Teresa Restrepo", direction:"C/ En Medio", city:"Castellon", phone:"900 000 000", mail:"andres.fabregat@estudiocactus.com", contact:"Esteban Franco", createdAt:'30/04/18', catalogue: true, notes:'texto de prueba de las notas'},
+        { name:"Paco Paquito", client:"Carlos Prado", direction:"C/ En Medio", city:"Castellon", phone:"900 000 000", mail:"mail@mail.com", contact:"Esteban Franco", createdAt:'30/04/18', granite: true, notes:'algun otro texto de prueba de las notas'},
+        { name:"Paco Paquito", client:"Teresa Restrepo", direction:"C/ En Medio", city:"Castellon", phone:"900 000 000", mail:"mail@mail.com", contact:"Esteban Franco", createdAt:'30/04/18', compac: true, piece: true},
+        { name:"Antonio Gonzalez", client:"Teresa Restrepo", direction:"C/ En Medio", city:"Castellon", phone:"900 000 000", mail:"mail@mail.com", contact:"Esteban Franco", createdAt:'30/04/18', catalogue: true},
+        { name:"Carmen Villalobos", client:"Teresa Restrepo", direction:"C/ En Medio", city:"Castellon", phone:"900 000 000", mail:"mail@mail.com", contact:"Esteban Franco", createdAt:'30/04/18', granite: true, piece: true},
+        { name:"Jorge Santos", client:"Carlos Prado", direction:"C/ En Medio", city:"Castellon", phone:"900 000 000", mail:"mail@mail.com", contact:"Esteban Franco", createdAt:'30/04/18', catalogue:'false'},
+        { name:"Paco Paquito", client:"Teresa Restrepo", direction:"C/ En Medio", city:"Castellon", phone:"900 000 000", mail:"mail@mail.com", contact:"Esteban Franco", createdAt:'30/04/18'},
+        { name:"Carmen Villalobos", client:"Teresa Restrepo", direction:"C/ En Medio", city:"Castellon", phone:"900 000 000", mail:"mail@mail.com", contact:"Esteban Franco", createdAt:'30/04/18'},
+        { name:"Carmen Villalobos", client:"Teresa Restrepo", direction:"C/ En Medio", city:"Castellon", phone:"900 000 000", mail:"mail@mail.com", contact:"Esteban Franco", createdAt:'30/04/18'},
+        { name:"Antonio Gonzalez", client:"Helena Marin", direction:"C/ En Medio", city:"Castellon", phone:"900 000 000", mail:"mail@mail.com", contact:"Esteban Franco", createdAt:'30/04/18'},
+        { name:"Carmen Villalobos", client:"Helena Marin", direction:"C/ En Medio", city:"Castellon", phone:"900 000 000", mail:"mail@mail.com", contact:"Esteban Franco", createdAt:'30/04/18'},
+        { name:"Jorge Santos", client:"Carol Muñoz", direction:"C/ En Medio", city:"Castellon", phone:"900 000 000", mail:"mail@mail.com", contact:"Esteban Franco", createdAt:'30/04/18'},
+        { name:"Carmen Villalobos", client:"Teresa Restrepo", direction:"C/ En Medio", city:"Castellon", phone:"900 000 000", mail:"mail@mail.com", contact:"Esteban Franco", createdAt:'30/04/18'},
+        { name:"Carmen Villalobos", client:"Teresa Restrepo", direction:"C/ En Medio", city:"Castellon", phone:"900 000 000", mail:"mail@mail.com", contact:"Esteban Franco", createdAt:'30/04/18'},
+        { name:"Paco Paquito", client:"Carlos Prado", direction:"C/ En Medio", city:"Castellon", phone:"900 000 000", mail:"mail@mail.com", contact:"Esteban Franco", createdAt:'30/04/18'},
+        { name:"Paco Paquito", client:"Teresa Restrepo", direction:"C/ En Medio", city:"Castellon", phone:"900 000 000", mail:"mail@mail.com", contact:"Esteban Franco", createdAt:'30/04/18'},
+        { name:"Antonio Gonzalez", client:"Teresa Restrepo", direction:"C/ En Medio", city:"Castellon", phone:"900 000 000", mail:"mail@mail.com", contact:"Esteban Franco", createdAt:'30/04/18'},
+        { name:"Carmen Villalobos", client:"Teresa Restrepo", direction:"C/ En Medio", city:"Castellon", phone:"900 000 000", mail:"mail@mail.com", contact:"Esteban Franco", createdAt:'30/04/18'},
+        { name:"Jorge Santos", client:"Carlos Prado", direction:"C/ En Medio", city:"Castellon", phone:"900 000 000", mail:"mail@mail.com", contact:"Esteban Franco", createdAt:'30/04/18'},
+        { name:"Paco Paquito", client:"Teresa Restrepo", direction:"C/ En Medio", city:"Castellon", phone:"900 000 000", mail:"mail@mail.com", contact:"Esteban Franco", createdAt:'30/04/18'},
+        { name:"Carmen Villalobos", client:"Teresa Restrepo", direction:"C/ En Medio", city:"Castellon", phone:"900 000 000", mail:"mail@mail.com", contact:"Esteban Franco", createdAt:'30/04/18'},
+        { name:"Carmen Villalobos", client:"Teresa Restrepo", direction:"C/ En Medio", city:"Castellon", phone:"900 000 000", mail:"mail@mail.com", contact:"Esteban Franco", createdAt:'30/04/18'},
+        { name:"Antonio Gonzalez", client:"Helena Marin", direction:"C/ En Medio", city:"Castellon", phone:"900 000 000", mail:"mail@mail.com", contact:"Esteban Franco", createdAt:'30/04/18'},
+        { name:"Carmen Villalobos", client:"Helena Marin", direction:"C/ En Medio", city:"Castellon", phone:"900 000 000", mail:"mail@mail.com", contact:"Esteban Franco", createdAt:'30/04/18'},
+        { name:"Jorge Santos", client:"Carol Muñoz", direction:"C/ En Medio", city:"Castellon", phone:"900 000 000", mail:"mail@mail.com", contact:"Esteban Franco", createdAt:'30/04/18'},
+        { name:"Carmen Villalobos", client:"Teresa Restrepo", direction:"C/ En Medio", city:"Castellon", phone:"900 000 000", mail:"mail@mail.com", contact:"Esteban Franco", createdAt:'30/04/18'},
       ],
     };
   },
-};
-</script> 
+  }
+
+</script>

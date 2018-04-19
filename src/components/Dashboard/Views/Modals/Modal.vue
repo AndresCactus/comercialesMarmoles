@@ -1,6 +1,7 @@
 <script>
   export default {
     name: 'modal',
+    props: ['title', 'body'],
     methods: {
       close() {
         this.$emit('close');
@@ -21,7 +22,7 @@
           id="modalTitle"
         >
           <slot name="header">
-            This is the default tile!
+            {{title}}
 
             <button
               type="button"
@@ -38,12 +39,11 @@
           id="modalDescription"
         >
           <slot name="body">
-            I'm the default body!
+            {{body}}
           </slot>
         </section>
         <footer class="modal-footer">
           <slot name="footer">
-            I'm the default footer!
 
             <button
               type="button"
@@ -51,7 +51,7 @@
               @click="close"
               aria-label="Close modal"
             >
-              Close me!
+              Cerrar
             </button>
           </slot>
         </footer>
@@ -78,6 +78,10 @@
     overflow-x: auto;
     display: flex;
     flex-direction: column;
+    width: 35%;
+    height: 35%;
+    margin: 0 auto;
+    top: 25%;
   }
 
   .modal-header,

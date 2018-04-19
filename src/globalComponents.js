@@ -1,7 +1,6 @@
 import fgInput from './components/UIComponents/Inputs/formGroupInput.vue'
 import DropDown from './components/UIComponents/Dropdown.vue'
 
-import modal from './components/UIComponents/modal.vue'
 
 import VueGoodTable from 'vue-good-table';
 // import the styles 
@@ -16,7 +15,6 @@ const GlobalComponents = {
   install (Vue) {
     Vue.component('fg-input', fgInput)
     Vue.component('drop-down', DropDown)
-    Vue.component('modal', modal)
     Vue.use(VueGoodTable);
   }
 }

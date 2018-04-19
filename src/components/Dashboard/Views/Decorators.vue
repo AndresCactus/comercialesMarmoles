@@ -62,60 +62,10 @@
               <button type="button" class="nc-icon nc-square-pin" data-toggle="modal" data-target="#mapModal">
               </button>
 
-              <!-- Modal Map-->
-              <div class="modal fade" id="mapModal">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                      <h4 class="modal-title">Posicion de la visita</h4>
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                      {{props.row.location}}
-                    </div>
-
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-
             </span>
             <span v-else-if="props.column.field == 'notes'">
               <button type="button" class="nc-icon nc-paper-2" data-toggle="modal" data-target="#textModal">
               </button>
-
-              <!-- Text Modal -->
-              <div class="modal fade" id="textModal">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                      <h4 class="modal-title">Notas</h4>
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                      {{props.row.notes}}
-                    </div>
-
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
 
             </span>
             <span v-else>
