@@ -79,7 +79,7 @@
     display: flex;
     flex-direction: column;
     width: 35%;
-    height: 35%;
+    height: fit-content;
     margin: 0 auto;
     top: 25%;
   }
@@ -88,6 +88,7 @@
   .modal-footer {
     padding: 15px;
     display: flex;
+    align-items: center;
   }
 
   .modal-header {
@@ -109,7 +110,6 @@
   .btn-close {
     border: none;
     font-size: 20px;
-    padding: 20px;
     cursor: pointer;
     font-weight: bold;
     color: #4AAE9B;

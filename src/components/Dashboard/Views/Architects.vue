@@ -21,7 +21,7 @@
       };
     },
     mounted() {
-      this.$http.get('http://www.mocky.io/v2/5ad874b63000005800e58811')
+      this.$http.get('http://www.mocky.io/v2/5ad9e84c2f00005e00cfe007')
         .then(response => {
           if(response.status === 200) {
             this.rows = response.data;

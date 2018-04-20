@@ -58,17 +58,12 @@
           </span>
         </span>
         <span v-else-if="props.column.field == 'position'">
-          <button type="button" class="nc-icon nc-square-pin" data-toggle="modal" data-target="#mapModal">
+          <button type="button" class="nc-icon nc-square-pin" @click="showModal('Posición de la visita', props.row.position)">
           </button>
         </span>
         <span v-else-if="props.column.field == 'notes'">
-          {{props.row.notes}}
-          <button type="button" class="nc-icon nc-paper-2" @click="showModal">
+          <button type="button" class="nc-icon nc-paper-2" @click="showModal('Notas', props.row.notes)">
           </button>
-          <modal title="Notas" :body="props.row.notes"
-            v-show="isModalVisible"
-            @close="closeModal"
-          />
 
         </span>
         <span v-else>
@@ -77,6 +72,13 @@
       </template>
 
     </vue-good-table>
+
+    <modal
+      :title = title
+      :body = body
+      v-show="isModalVisible"
+      @close="closeModal"
+    />
 
   </div>
 
@@ -260,12 +262,16 @@ export default {
         },
       ],
       isModalVisible: false,
+      title: '',
+      body: ''
     };
   },
   props: ['rows'],
   methods: {
-    showModal() {
+    showModal(tit, bod) {
       this.isModalVisible = true;
+      this.title = tit;
+      this.body = bod;
     },
     closeModal() {
       this.isModalVisible = false;
