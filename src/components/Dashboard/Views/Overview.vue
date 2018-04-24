@@ -185,6 +185,7 @@
       StatsCard
     },
     data () {
+      console.log("Pintamos el toquen: "+localStorage.token);
       return {
         editTooltip: 'Edit Task',
         deleteTooltip: 'Remove',

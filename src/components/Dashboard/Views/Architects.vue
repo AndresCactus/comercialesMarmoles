@@ -22,6 +22,11 @@
     },
     mounted() {
       this.$http.get('http://www.mocky.io/v2/5ad9e84c2f00005e00cfe007')
+      // ,{
+      //   headers: {
+      //     jwt: ''
+      //   }
+      // }
         .then(response => {
           if(response.status === 200) {
             this.rows = response.data;

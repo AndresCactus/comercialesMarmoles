@@ -55,8 +55,8 @@
             <a class="dropdown-item" href="#">Separated link</a>
           </drop-down> -->
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              Log out
+            <a href="/" @click="logOut()" class="nav-link">
+              Salir
             </a>
           </li>
         </ul>
@@ -78,6 +78,9 @@
       }
     },
     methods: {
+      logOut(){
+        localStorage.token = "";
+      },
       capitalizeFirstLetter (string) {
         return string.charAt(0).toUpperCase() + string.slice(1)
       },
