@@ -107,7 +107,7 @@
         </div>
       </div>
 
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-md-6">
           <chart-card
             :chart-data="barChart.data"
@@ -165,7 +165,7 @@
           </card>
 
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -185,7 +185,7 @@
       StatsCard
     },
     data () {
-      console.log("Pintamos el toquen: "+localStorage.token);
+      console.log("Pintamos el token: "+localStorage.token);
       return {
         editTooltip: 'Edit Task',
         deleteTooltip: 'Remove',

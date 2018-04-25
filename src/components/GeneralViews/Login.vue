@@ -1,35 +1,40 @@
 <template>
   <div class="login-wrapper border border-light">
     <form class="form-signin" @submit.prevent="login">
-      <h2 class="form-signin-heading">Please sign in</h2>
+      <div class="logo-img">
+        <img src="static/img/marmoles-logo-black.png" alt="">
+      </div>
+      <h2 class="form-signin-heading">MÁRMOLES SOL</h2>
+      <h4 class="form-signin-heading">COMERCIALES</h4>
       <div class="alert alert-danger" v-if="error">{{ error }}</div>
-      <label for="inputEmail" class="sr-only">Email address</label>
-      <input v-model="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-      <label for="inputPassword" class="sr-only">Password</label>
-      <input v-model="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      <label for="inputText" class="sr-only">Usuario</label>
+      <input v-model="text" type="text" id="inputText" class="form-control" placeholder="Usuario" required autofocus>
+      <label for="inputPassword" class="sr-only">Contraseña</label>
+      <input v-model="password" type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required>
+      <button class="btn btn-block btn-login" type="submit">INICIAR SESIÓN</button>
     </form>
   </div>
 </template>
 
 <script>
+console.log("login.vue");
 export default {
   name: 'Login',
   data () {
     return {
-      email: '',
+      text: '',
       password: '',
       error: false
     }
   },
   updated () {
     if (localStorage.token) {
-      this.$router.replace(this.$route.query.redirect || '/admin/overview')
+      this.$router.replace(this.$route.query.redirect || '/admin/overview');
     }
   },
   methods: {
     login () {
-      this.$http.post('http://www.mocky.io/v2/5adef24d3300006a00e4d6c7', { user: this.email, password: this.password })
+      this.$http.post('http://www.mocky.io/v2/5adef24d3300006a00e4d6c7', { user: this.text, password: this.password })
         .then(request => this.loginSuccessful(request))
         .catch(() => this.loginFailed())
     },
@@ -39,17 +44,19 @@ export default {
         this.loginFailed()
         return
       }
-      if (this.email != req.data.user || this.password != req.data.password) {
-        this.loginFailed()
-        return
-      }
-      this.error = false
-      localStorage.token = req.data.token
-      this.$router.replace(this.$route.query.redirect || '/admin/overview')
+      // if (this.text != req.data.user || this.password != req.data.password) {
+      //   this.loginFailed()
+      //   return
+      // }
+      this.error = false;
+      localStorage.token = req.data.token;
+      console.log('entro');
+      console.log("Token al entrar "+localStorage.token);
+      this.$router.replace(this.$route.query.redirect || '/admin');
     },
     loginFailed () {
-      this.error = 'Usuario o contraseña erroreos!'
-      delete localStorage.token
+      this.error = 'Usuario o contraseña erroreos!';
+      delete localStorage.token;
     }
   }
 }
@@ -61,12 +68,15 @@ body {
   background-image: url("../../../static/img/background-image.jpg");
   background-repeat: no-repeat;
   background-size: auto;
+  height: 100%;
+  min-height: 0px;
 }
 
 .login-wrapper {
-  background: #fffC;
-  width: 50%;
+  background: rgba(255, 255, 255, 0.8);
+  width: 400px;
   margin: 15% auto;
+  border-radius: 20px;
 }
 
 .form-signin {
@@ -77,6 +87,7 @@ body {
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
   margin-bottom: 10px;
+  text-align: center;
 }
 .form-signin .checkbox {
   font-weight: normal;
@@ -92,7 +103,7 @@ body {
 .form-signin .form-control:focus {
   z-index: 2;
 }
-.form-signin input[type="email"] {
+.form-signin input[type="text"] {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
@@ -101,6 +112,54 @@ body {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+.btn-login{
+  background-color: black;
+  color: white;
+  border-radius: 20px;
+  border: 0px;
+}
+
+.form-control{
+  border-top: 0px !important;
+  border-left: 0px !important;
+  border-right: 0px !important;
+  background-color: transparent !important;
+}
+
+.logo-img{
+  width: 100%;
+  height: 100%;
+}
+
+.logo-img img {
+    max-width: 150px !important;
+}
+
+h2{
+  margin-top: 10px !important;
+}
+
+h4{
+  margin-top: 10px !important;
+}
+
+.form-control::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: grey;
+  text-align: center;
+}
+.form-control::-moz-placeholder { /* Firefox 19+ */
+  color: grey;
+  text-align: center;
+}
+.form-control:-ms-input-placeholder { /* IE 10+ */
+  color: grey;
+  text-align: center;
+}
+.form-control:-moz-placeholder { /* Firefox 18- */
+  color: grey;
+  text-align: center;
 }
 
 </style>

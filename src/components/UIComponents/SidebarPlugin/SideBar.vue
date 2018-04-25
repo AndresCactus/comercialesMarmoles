@@ -7,7 +7,7 @@
       <div class="logo">
         <a href="#" class="simple-text">
             <div class="logo-img">
-                <img src="static/img/marmoles-logo.png" alt="">
+                <img src="static/img/marmoles-logo.png" alt="" height="40px">
             </div>
           {{title}}
         </a>

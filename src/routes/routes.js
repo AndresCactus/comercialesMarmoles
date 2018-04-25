@@ -17,20 +17,42 @@ import Decorators from 'src/components/Dashboard/Views/Decorators.vue'
 import MarbleWorkers from 'src/components/Dashboard/Views/MarbleWorkers.vue'
 import Kitchen from 'src/components/Dashboard/Views/Kitchen.vue'
 
+var jwt = localStorage.token;
+console.log("token router", jwt);
+
 const routes = [
   {
     path: '/',
-    component: Login,
-    redirect: '/login'
+    component: DashboardLayout,
+    redirect: '/admin'
   },
-  { 
+  {
     path: '/login',
-    component: Login
+    component: Login,
+    beforeEnter: (to, from, next) => {
+      if(jwt){
+        next('/admin/overview');
+      }
+      next();
+    }
   },
   {
     path: '/admin',
     component: DashboardLayout,
     redirect: '/admin/overview',
+    beforeEnter: (to, from, next) => {
+      console.log('tienes token? ' + localStorage.token);
+
+      if(localStorage.token){
+        console.log('entro capullo');
+        next();
+      }
+      else{
+        console.log('entro capullo 2');
+        next('/login');
+      }
+        
+    },
     children: [
       {
         path: 'overview',
