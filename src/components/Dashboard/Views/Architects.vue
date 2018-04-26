@@ -21,12 +21,8 @@
       };
     },
     mounted() {
-      this.$http.get('http://www.mocky.io/v2/5ad9e84c2f00005e00cfe007')
-      // ,{
-      //   headers: {
-      //     jwt: ''
-      //   }
-      // }
+      this.$http.headers.common.Authorization = localStorage.token;
+      this.$http.get('http://www.mocky.io/v2/5ae1abfe2d00004d009d7d9f')
         .then(response => {
           if(response.status === 200) {
             this.rows = response.data;

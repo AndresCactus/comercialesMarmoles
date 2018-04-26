@@ -9,7 +9,6 @@ import UserProfile from 'src/components/Dashboard/Views/UserProfile.vue'
 import TableList from 'src/components/Dashboard/Views/TableList.vue'
 import Typography from 'src/components/Dashboard/Views/Typography.vue'
 import Icons from 'src/components/Dashboard/Views/Icons.vue'
-import Maps from 'src/components/Dashboard/Views/Maps.vue'
 import Notifications from 'src/components/Dashboard/Views/Notifications.vue'
 
 import Architects from 'src/components/Dashboard/Views/Architects.vue'
@@ -18,7 +17,6 @@ import MarbleWorkers from 'src/components/Dashboard/Views/MarbleWorkers.vue'
 import Kitchen from 'src/components/Dashboard/Views/Kitchen.vue'
 
 var jwt = localStorage.token;
-console.log("token router", jwt);
 
 const routes = [
   {
@@ -41,14 +39,11 @@ const routes = [
     component: DashboardLayout,
     redirect: '/admin/overview',
     beforeEnter: (to, from, next) => {
-      console.log('tienes token? ' + localStorage.token);
 
       if(localStorage.token){
-        console.log('entro capullo');
         next();
       }
       else{
-        console.log('entro capullo 2');
         next('/login');
       }
         
@@ -98,11 +93,6 @@ const routes = [
         path: 'icons',
         name: 'Icons',
         component: Icons
-      },
-      {
-        path: 'maps',
-        name: 'Maps',
-        component: Maps
       },
       {
         path: 'notifications',

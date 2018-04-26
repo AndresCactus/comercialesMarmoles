@@ -11,7 +11,7 @@
   </gmap-map>
 </template>
 <script>
-  import {API_KEY} from './Maps/API_KEY'
+  import {API_KEY} from './API_KEY'
   import Vue from 'vue'
   import * as VueGoogleMaps from 'vue2-google-maps'
   Vue.use(VueGoogleMaps, {
@@ -20,11 +20,15 @@
     }
   })
   export default {
+    props: ['lat2', 'long2'],
     data () {
+    console.log('lat2, '+ this.lat2);
+    console.log('long, '+ typeof this.long2);
+    console.log('long, '+ (this.long2));
       return {
         center: {
-          lat: 40.748817,
-          lng: -73.985428
+          lat: this.lat2,
+          lng: this.long2
         },
         options: {
           styles: [{
@@ -72,6 +76,6 @@
 </script>
 <style>
   #map {
-    min-height: calc(100vh - 123px);
+    min-height: calc(50vh - 123px);
   }
 </style>

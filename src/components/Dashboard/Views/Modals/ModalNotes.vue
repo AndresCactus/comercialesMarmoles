@@ -37,6 +37,7 @@
         <section
           class="modal-body"
           id="modalDescription"
+          style="text-align:center;"
         >
           <slot name="body">
             {{body}}

@@ -58,7 +58,7 @@
           </span>
         </span>
         <span v-else-if="props.column.field == 'position'">
-          <button type="button" class="nc-icon nc-square-pin" @click="showModal('Posición de la visita', props.row.position)">
+          <button type="button" class="nc-icon nc-square-pin" @click="showModalMap('Posición de la visita', props.row.lat, props.row.long)">
           </button>
         </span>
         <span v-else-if="props.column.field == 'notes'">
@@ -73,10 +73,18 @@
 
     </vue-good-table>
 
-    <modal
+    <modalMap
+      :title = title
+      :lat = lat
+      :long = long
+      v-show="isModalMapVisible"
+      @close="closeModal"
+    />
+
+    <modalNotes
       :title = title
       :body = body
-      v-show="isModalVisible"
+      v-show="isModalNotesVisible"
       @close="closeModal"
     />
 
@@ -86,12 +94,14 @@
 
 <script>
 
-import Modal from '../Modals/Modal.vue'
+import ModalNotes from '../Modals/ModalNotes.vue'
+import ModalMap from '../Modals/ModalMap.vue'
 
 export default {
   name: 'my-component',
   components: {
-    Modal
+    ModalNotes,
+    ModalMap
   },
   data(){
     return {
@@ -261,20 +271,30 @@ export default {
           },
         },
       ],
-      isModalVisible: false,
+      isModalNotesVisible: false,
+      isModalMapVisible: false,
       title: '',
-      body: ''
+      body: '',
+      lat: '',
+      long: ''
     };
   },
   props: ['rows'],
   methods: {
     showModal(tit, bod) {
-      this.isModalVisible = true;
+      this.isModalNotesVisible = true;
       this.title = tit;
       this.body = bod;
     },
+    showModalMap(tit, lat, long){
+      this.isModalMapVisible = true;
+      this.title = tit;
+      this.lat = lat;
+      this.long = long;
+    },
     closeModal() {
-      this.isModalVisible = false;
+      this.isModalNotesVisible = false;
+      this.isModalMapVisible = false;
     }
   },
 };
