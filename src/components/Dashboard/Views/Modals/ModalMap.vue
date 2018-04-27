@@ -1,23 +1,12 @@
 <script>
-import Maps from '../Maps/Maps.vue'
-
   export default {
-    components: {
-        Maps
-    },
     name: 'modal',
     props: ['title', 'lat', 'long'],
     methods: {
       close() {
         this.$emit('close');
       },
-    },
-    data(){
-        return {
-            lat2: '',
-            long2: ''
-        };
-    },
+    }
   };
 </script>
 <template>
@@ -53,11 +42,7 @@ import Maps from '../Maps/Maps.vue'
         {{this.lat}}
         {{this.long}}
             <slot name="body">
-                <maps
-                    :lat2 = '39.9914896'
-                    :long2 = Number(this.long)
-                />
-                <!-- <iframe :src="'https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d6114.069146983148!2d'+long+'!3d'+lat+'!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2ses!4v1524734748007'" width="400" height="300" frameborder="0" style="border:0" allowfullscreen></iframe> -->
+                <iframe width="100%" height="350" frameborder="0" style="border:0" :src="'https://www.google.com/maps/embed/v1/place?q='+lat+','+long+'&amp;key=AIzaSyDKiR7aTynp6_WAogwFzSeNAgR-AsMm4no'"></iframe>
             </slot>
         </section>
         <footer class="modal-footer">

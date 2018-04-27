@@ -6,8 +6,6 @@ import Login from '../components/GeneralViews/Login.vue'
 // Admin pages
 import Overview from 'src/components/Dashboard/Views/Overview.vue'
 import UserProfile from 'src/components/Dashboard/Views/UserProfile.vue'
-import TableList from 'src/components/Dashboard/Views/TableList.vue'
-import Typography from 'src/components/Dashboard/Views/Typography.vue'
 import Icons from 'src/components/Dashboard/Views/Icons.vue'
 import Notifications from 'src/components/Dashboard/Views/Notifications.vue'
 
@@ -78,16 +76,6 @@ const routes = [
         path: 'user',
         name: 'Usuarios',
         component: UserProfile
-      },
-      {
-        path: 'table-list',
-        name: 'Table List',
-        component: TableList
-      },
-      {
-        path: 'typography',
-        name: 'Typography',
-        component: Typography
       },
       {
         path: 'icons',

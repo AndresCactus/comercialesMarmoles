@@ -22,7 +22,7 @@
     },
     mounted() {
       this.$http.headers.common.Authorization = localStorage.token;
-      this.$http.get('http://www.mocky.io/v2/5ae1abfe2d00004d009d7d9f')
+      this.$http.get('http://www.mocky.io/v2/5ae2e5dc3100000e00083c16')
         .then(response => {
           if(response.status === 200) {
             this.rows = response.data;

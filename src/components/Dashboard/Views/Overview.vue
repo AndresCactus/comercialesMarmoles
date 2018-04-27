@@ -173,14 +173,12 @@
   import ChartCard from 'src/components/UIComponents/Cards/ChartCard.vue'
   import StatsCard from 'src/components/UIComponents/Cards/StatsCard.vue'
   import Card from 'src/components/UIComponents/Cards/Card.vue'
-  import LTable from 'src/components/UIComponents/Table.vue'
   import Checkbox from 'src/components/UIComponents/Inputs/Checkbox.vue'
 
   export default {
     components: {
       Checkbox,
       Card,
-      LTable,
       ChartCard,
       StatsCard
     },

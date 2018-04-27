@@ -23,8 +23,7 @@
     props: ['lat2', 'long2'],
     data () {
     console.log('lat2, '+ this.lat2);
-    console.log('long, '+ typeof this.long2);
-    console.log('long, '+ (this.long2));
+    console.log('long2, '+ (this.long2));
       return {
         center: {
           lat: this.lat2,
