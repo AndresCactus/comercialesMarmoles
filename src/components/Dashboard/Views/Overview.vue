@@ -5,14 +5,14 @@
         <div class="col-xl-3 col-md-6">
           <stats-card>
             <div slot="header" class="icon-warning">
-              <i class="nc-icon nc-chart text-warning"></i>
+              <i class="nc-icon nc-bag text-warning"></i>
             </div>
             <div slot="content">
-              <p class="card-category">Capacity</p>
-              <h4 class="card-title">105GB</h4>
+              <p class="card-category">Visitas hoy</p>
+              <h4 class="card-title">{{visits[0].today}}</h4>
             </div>
             <div slot="footer">
-              <i class="fa fa-refresh"></i>Updated now
+              <i class="fa fa-refresh"></i>Hoy
             </div>
           </stats-card>
         </div>
@@ -20,11 +20,11 @@
         <div class="col-xl-3 col-md-6">
           <stats-card>
             <div slot="header" class="icon-success">
-              <i class="nc-icon nc-light-3 text-success"></i>
+              <i class="nc-icon nc-bag text-success"></i>
             </div>
             <div slot="content">
-              <p class="card-category">Revenue</p>
-              <h4 class="card-title">$1,345</h4>
+              <p class="card-category">Visitas semana</p>
+              <h4 class="card-title">{{visits[0].week}}</h4>
             </div>
             <div slot="footer">
               <i class="fa fa-calendar-o"></i>Last day
@@ -35,11 +35,11 @@
         <div class="col-xl-3 col-md-6">
           <stats-card>
             <div slot="header" class="icon-danger">
-              <i class="nc-icon nc-vector text-danger"></i>
+              <i class="nc-icon nc-bag text-danger"></i>
             </div>
             <div slot="content">
-              <p class="card-category">Errors</p>
-              <h4 class="card-title">23</h4>
+              <p class="card-category">Visitas mes</p>
+              <h4 class="card-title">{{visits[0].month}}</h4>
             </div>
             <div slot="footer">
               <i class="fa fa-clock-o"></i>Last day
@@ -50,10 +50,10 @@
         <div class="col-xl-3 col-md-6">
           <stats-card>
             <div slot="header" class="icon-info">
-              <i class="nc-icon nc-favourite-28 text-primary"></i>
+              <i class="nc-icon nc-single-copy-04 text-primary"></i>
             </div>
             <div slot="content">
-              <p class="card-category">Followers</p>
+              <p class="card-category">Catálogos mes</p>
               <h4 class="card-title">+45</h4>
             </div>
             <div slot="footer">
@@ -69,14 +69,14 @@
                       :chart-options="lineChart.options"
                       :responsive-options="lineChart.responsiveOptions">
             <template slot="header">
-              <h4 class="card-title">Users Behavior</h4>
-              <p class="card-category">24 Hours performance</p>
+              <h4 class="card-title">Catálogos</h4>
+              <p class="card-category">Catálogos y expositores entregados esta semana en relación a las visitas</p>
             </template>
             <template slot="footer">
               <div class="legend">
-                <i class="fa fa-circle text-info"></i> Open
-                <i class="fa fa-circle text-danger"></i> Click
-                <i class="fa fa-circle text-warning"></i> Click Second Time
+                <i class="fa fa-circle text-info"></i> Visitas realizadas
+                <i class="fa fa-circle text-danger"></i> Catalogos entregados
+                <i class="fa fa-circle text-warning"></i> Expositores entregados
               </div>
               <hr>
               <div class="stats">
@@ -182,9 +182,22 @@
       ChartCard,
       StatsCard
     },
+    mounted() {
+      this.$http.headers.common.Authorization = localStorage.token;
+      this.$http.get('http://www.mocky.io/v2/5ae339723100004f0d083df9')
+        .then(response => {
+          if(response.status === 200) {
+            this.visits = response.data;
+            console.log(this.visits[0].series);
+          }
+        })
+        .catch(error => {
+          console.console(error)
+        })
+    },
     data () {
-      console.log("Pintamos el token: "+localStorage.token);
       return {
+        visits: [],
         editTooltip: 'Edit Task',
         deleteTooltip: 'Remove',
         pieChart: {
@@ -195,16 +208,16 @@
         },
         lineChart: {
           data: {
-            labels: ['9:00AM', '12:00AM', '3:00PM', '6:00PM', '9:00PM', '12:00PM', '3:00AM', '6:00AM'],
+            labels: ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes'],
             series: [
-              [287, 385, 490, 492, 554, 586, 698, 695],
-              [67, 152, 143, 240, 287, 335, 435, 437],
-              [23, 113, 67, 108, 190, 239, 307, 308]
+              [287, 385, 490, 492, 554],
+              [67, 152, 203, 240, 287],
+              [87, 102, 103, 270, 387]
             ]
           },
           options: {
             low: 0,
-            high: 800,
+            high: 600,
             showArea: false,
             height: '245px',
             axisX: {
@@ -272,5 +285,15 @@
   }
 </script>
 <style>
+
+.card-stats .card-body .numbers {
+    text-align: center;
+}
+
+h4{
+  margin-top: 15px !important;
+  font-size: 2vmax;
+  font-weight: 400 !important;
+}
 
 </style>
