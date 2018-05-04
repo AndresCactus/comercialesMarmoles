@@ -58,11 +58,11 @@
           </span>
         </span>
         <span v-else-if="props.column.field == 'position'">
-          <button type="button" class="nc-icon nc-square-pin" @click="showModalMap('Posición de la visita', props.row.lat, props.row.long)">
+          <button type="button" class="fa fa-map-marker" @click="showModalMap('Posición de la visita', props.row.lat, props.row.long)">
           </button>
         </span>
         <span v-else-if="props.column.field == 'notes'">
-          <button type="button" class="nc-icon nc-paper-2" @click="showModal('Notas', props.row.notes)">
+          <button type="button" class="fa fa-sticky-note-o" @click="showModal('Notas', props.row.notes)">
           </button>
 
         </span>
@@ -301,5 +301,14 @@ export default {
 </script>
 
 <style>
+
+button{
+  padding-bottom: 0;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 1px;
+  text-align: center;
+  border: 0px;
+}
 
 </style>

@@ -25,6 +25,18 @@
 <script>
 export default {
   name: 'my-component',
+  mounted() {
+  this.$http.headers.common.Authorization = localStorage.token;
+  this.$http.get('http://www.mocky.io/v2/5ae6def92f00001000f05892')
+    .then(response => {
+      if(response.status === 200) {
+        this.rows = response.data;
+      }
+    })
+    .catch(error => {
+      console.console(error)
+    })
+  },
   data(){
     return {
       columns: [
@@ -59,9 +71,7 @@ export default {
           }
         },
       ],
-      rows: [
-        { name:"Carmen Villalobos", createdAt:'30/04/18', alert: "Número de visitas no realizado" },
-      ],
+      rows: [],
     };
   },
 };

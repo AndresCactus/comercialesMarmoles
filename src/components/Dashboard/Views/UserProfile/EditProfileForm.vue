@@ -3,13 +3,13 @@
     <h4 slot="header" class="card-title">Crear usuario</h4>
     <form>
       <div class="row">
-        <div class="col-md-4">
+        <!-- <div class="col-md-4">
           <fg-input type="text"
                     label="Usuario"
                     placeholder="Nombre de usuario"
                     v-model="user.username">
           </fg-input>
-        </div>
+        </div> -->
         <div class="col-md-4">
           <fg-input type="text"
                     label="Nombre"
@@ -23,6 +23,24 @@
                     placeholder="Apellidos del comercial"
                     v-model="user.surname">
           </fg-input>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <div class="row">
+              <label class="control-label">
+                Rol
+              </label>
+            </div>
+            <div class="row">
+              <select class="selectRol" v-model="user.rol">
+                <option disabled value="">Selecciona un rol</option>
+                <option value="architects">Arquitecto</option>
+                <option value="decorators">Decorador</option>
+                <option value="marbleWorkers">Marmolista</option>
+                <option value="kitchen">Tiendas de cocina</option>
+              </select>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -100,6 +118,8 @@
 </template>
 <script>
   import Card from 'src/components/UIComponents/Cards/Card.vue'
+  import db from '../../../firebaseInit'
+  import admin from '../../../firebaseInitAdmin'
 
   export default {
     components: {
@@ -108,32 +128,67 @@
     data () {
       return {
         user: {
-          // company: 'Paper Dashboard',
-          // username: 'michael23',
-          // email: '',
-          // firstName: 'Mike',
-          // lastName: 'Andrew',
-          // address: 'Melbourne, Australia',
-          // city: 'melbourne',
-          // country: 'Australia',
-          // postalCode: '',
-          // aboutMe: `Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.`
           username: '',
           name: '',
           surname: '',
           mail: '',
           pass: '',
+          rol: ''
         }
       }
     },
     methods: {
       createUser () {
-        alert('Datos del usuario creado: ' + JSON.stringify(this.user))
-      }
+        alert('Datos del usuario creado: ' + JSON.stringify(this.user));
+        
+        // db.auth().createUser({
+        //   email: this.user.mail,
+        //   password: this.user.pass
+        // })
+        //   .then(function(userRecord) {
+        //     // See the UserRecord reference doc for the contents of userRecord.
+        //     console.log("Successfully created new user:", userRecord.uid);
+        //   })
+        //   .catch(function(error) {
+        //     console.log("Error creating new user:", error);
+        //   });
+
+
+        db.auth().createUserWithEmailAndPassword(this.user.mail, this.user.pass).catch(function(error) {
+          // Handle Errors here.
+          console.log(error);
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // ...
+        });
+
+        db.firestore().collection("users").doc(this.user.mail).set({
+          name: this.user.name,
+          surname: this.user.surname,
+          mail: this.user.mail,
+          rol: this.user.rol,
+        })
+        .then(function() {
+            console.log("Document successfully written!");
+        })
+        .catch(function(error) {
+            console.error("Error writing document: ", error);
+        });
+      },
     }
   }
 
 </script>
 <style>
+
+.row{
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.selectRol{
+  height: 40px;
+  margin-top: 4px;
+}
 
 </style>

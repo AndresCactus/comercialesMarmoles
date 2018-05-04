@@ -65,6 +65,9 @@
   </nav>
 </template>
 <script>
+
+import db from '../../firebaseInit'
+
   export default {
     computed: {
       routeName () {
@@ -79,7 +82,12 @@
     },
     methods: {
       logOut(){
-        delete localStorage.token;
+        //delete localStorage.token;
+        db.auth().signOut().then(function() {
+        // Sign-out successful.
+        }).catch(function(error) {
+        // An error happened.
+        });
       },
       capitalizeFirstLetter (string) {
         return string.charAt(0).toUpperCase() + string.slice(1)

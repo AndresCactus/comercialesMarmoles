@@ -14,7 +14,7 @@ import Decorators from 'src/components/Dashboard/Views/Decorators.vue'
 import MarbleWorkers from 'src/components/Dashboard/Views/MarbleWorkers.vue'
 import Kitchen from 'src/components/Dashboard/Views/Kitchen.vue'
 
-var jwt = localStorage.token;
+import db from '../components/firebaseInit'
 
 const routes = [
   {
@@ -26,10 +26,34 @@ const routes = [
     path: '/login',
     component: Login,
     beforeEnter: (to, from, next) => {
-      if(jwt){
-        next('/admin/overview');
-      }
-      next();
+
+      db.auth().onAuthStateChanged(function(user) {
+
+        if (user) {
+          var docRef = db.firestore().collection("users").doc(user.email);
+
+          docRef.get().then(function(doc) {
+              if (doc.exists) {
+                let rol = doc.data().rol;
+                  if (rol == 'admin'){
+                    next('/admin/overview');
+                  }
+                  else{
+                    next();
+                  }
+              } else {
+                  // doc.data() will be undefined in this case
+                  console.log("No existe el documento");
+              }
+          }).catch(function(error) {
+              console.log("Error getting document:", error);
+          });
+          // User is signed in.
+        } else {
+          // No user is signed in.
+          next();
+        }
+      });
     }
   },
   {
@@ -37,13 +61,35 @@ const routes = [
     component: DashboardLayout,
     redirect: '/admin/overview',
     beforeEnter: (to, from, next) => {
+      db.auth().onAuthStateChanged(function(user) {
+        if (user) {
 
-      if(localStorage.token){
-        next();
-      }
-      else{
-        next('/login');
-      }
+          var docRef = db.firestore().collection("users").doc(user.email);
+
+          docRef.get().then(function(doc) {
+              if (doc.exists) {
+                let rol = doc.data().rol;
+                  if (rol == 'admin'){
+                    next();
+                  }
+                  else{
+                    next('/login');
+                  }
+              } else {
+                  // doc.data() will be undefined in this case
+                  console.log("No existe el documento");
+              }
+          }).catch(function(error) {
+              console.log("Error getting document:", error);
+          });
+
+          // User is signed in.
+          next();
+        } else {
+          // No user is signed in.
+          next('/login');
+        }
+      });
         
     },
     children: [
