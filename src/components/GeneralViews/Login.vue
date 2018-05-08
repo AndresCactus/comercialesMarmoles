@@ -19,6 +19,7 @@
 <script>
 
 import db from '../firebaseInit'
+import admin from '../firebaseInitAdmin'
 
 export default {
   name: 'Login',
@@ -43,30 +44,6 @@ export default {
         // ...
       });
     },
-
-    // login () {
-    //   this.$http.post('http://www.mocky.io/v2/5adef24d3300006a00e4d6c7', { user: this.text, password: this.password })
-    //     .then(request => this.loginSuccessful(request))
-    //     .catch(() => this.loginFailed())
-    // },
-    // loginSuccessful (req) {
-    //   console.log(req);
-    //   if (!req.data.token) {
-    //     this.loginFailed()
-    //     return
-    //   }
-    //   // if (this.text != req.data.user || this.password != req.data.password) {
-    //   //   this.loginFailed()
-    //   //   return
-    //   // }
-    //   this.error = false;
-    //   localStorage.token = req.data.token;
-    //   this.$router.replace(this.$route.query.redirect || '/admin');
-    // },
-    // loginFailed () {
-    //   this.error = 'Usuario o contraseña erroreos!';
-    //   delete localStorage.token;
-    // }
   }
 }
 </script>

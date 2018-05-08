@@ -31,7 +31,7 @@
                 Rol
               </label>
             </div>
-            <div class="row">
+            <div class="row-select">
               <select class="selectRol" v-model="user.rol">
                 <option disabled value="">Selecciona un rol</option>
                 <option value="architects">Arquitecto</option>
@@ -141,26 +141,25 @@
       createUser () {
         alert('Datos del usuario creado: ' + JSON.stringify(this.user));
         
-        // db.auth().createUser({
-        //   email: this.user.mail,
-        //   password: this.user.pass
-        // })
-        //   .then(function(userRecord) {
-        //     // See the UserRecord reference doc for the contents of userRecord.
-        //     console.log("Successfully created new user:", userRecord.uid);
-        //   })
-        //   .catch(function(error) {
-        //     console.log("Error creating new user:", error);
-        //   });
+        admin.auth().createUser({
+          email: this.user.mail,
+          password: this.user.pass
+        })
+          .then(function(userRecord) {
+            // See the UserRecord reference doc for the contents of userRecord.
+            console.log("Successfully created new user:", userRecord.uid);
+          })
+          .catch(function(error) {
+            console.log("Error creating new user:", error);
+          });
 
-
-        db.auth().createUserWithEmailAndPassword(this.user.mail, this.user.pass).catch(function(error) {
-          // Handle Errors here.
-          console.log(error);
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          // ...
-        });
+        // db.auth().createUserWithEmailAndPassword(this.user.mail, this.user.pass).catch(function(error) {
+        //   // Handle Errors here.
+        //   console.log(error);
+        //   var errorCode = error.code;
+        //   var errorMessage = error.message;
+        //   // ...
+        // });
 
         db.firestore().collection("users").doc(this.user.mail).set({
           name: this.user.name,
@@ -184,11 +183,17 @@
 .row{
   margin-left: 0px;
   margin-right: 0px;
+  margin-top: 4px;
+}
+
+.row-select{
+  margin-top: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
 }
 
 .selectRol{
   height: 40px;
-  margin-top: 4px;
 }
 
 </style>

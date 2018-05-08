@@ -10,6 +10,7 @@
  
 <script>
   import TableData from './Tables/TableData.vue'
+  import db from '../../firebaseInit'
 
   export default {
     components: {
@@ -20,18 +21,14 @@
         rows: [],
       };
     },
-    mounted() {
-      this.$http.headers.common.Authorization = localStorage.token;
-      this.$http.get('http://www.mocky.io/v2/5ad9e84c2f00005e00cfe007')
-        .then(response => {
-          if(response.status === 200) {
-            this.rows = response.data;
-          }
+    created () {
+      db.firestore().collection('marbleWorkers').get().then((querySnapshot) => {
+        this.loading = false
+        querySnapshot.forEach((doc) => {
+          this.rows.push(doc.data());
         })
-        .catch(error => {
-          console.console(error)
-        })
-    },
+      })
+    }
   }
 
 </script>

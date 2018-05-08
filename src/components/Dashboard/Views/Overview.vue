@@ -101,7 +101,7 @@
               </div>
               <hr>
               <div class="stats">
-                <i class="fa fa-history"></i> Información actualizada al día de la semana
+                <i class="fa fa-history"></i> Información actualizada
               </div>
             </template>
           </chart-card>
