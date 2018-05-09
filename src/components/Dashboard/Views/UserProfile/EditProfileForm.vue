@@ -1,15 +1,8 @@
 <template>
   <card>
     <h4 slot="header" class="card-title">Crear usuario</h4>
-    <form>
+    <form id="userForm">
       <div class="row">
-        <!-- <div class="col-md-4">
-          <fg-input type="text"
-                    label="Usuario"
-                    placeholder="Nombre de usuario"
-                    v-model="user.username">
-          </fg-input>
-        </div> -->
         <div class="col-md-4">
           <fg-input type="text"
                     label="Nombre"
@@ -32,8 +25,8 @@
               </label>
             </div>
             <div class="row-select">
-              <select class="selectRol" v-model="user.rol">
-                <option disabled value="">Selecciona un rol</option>
+              <select class="selectRol" v-model="user.role">
+                <option disabled value="">Selecciona un role</option>
                 <option value="architects">Arquitecto</option>
                 <option value="decorators">Decorador</option>
                 <option value="marbleWorkers">Marmolista</option>
@@ -53,59 +46,13 @@
           </fg-input>
         </div>
         <div class="col-md-6">
-          <fg-input type="text"
+          <fg-input type="password"
                     label="Contraseña"
                     placeholder="Contraseña del usuario"
                     v-model="user.pass">
           </fg-input>
         </div>
       </div>
-
-      <!-- <div class="row">
-        <div class="col-md-12">
-          <fg-input type="text"
-                    label="Address"
-                    placeholder="Home Address"
-                    v-model="user.address">
-          </fg-input>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-4">
-          <fg-input type="text"
-                    label="City"
-                    placeholder="City"
-                    v-model="user.city">
-          </fg-input>
-        </div>
-        <div class="col-md-4">
-          <fg-input type="text"
-                    label="Country"
-                    placeholder="Country"
-                    v-model="user.country">
-          </fg-input>
-        </div>
-        <div class="col-md-4">
-          <fg-input type="number"
-                    label="Postal Code"
-                    placeholder="ZIP Code"
-                    v-model="user.postalCode">
-          </fg-input>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-12">
-          <div class="form-group">
-            <label>About Me</label>
-            <textarea rows="5" class="form-control border-input"
-                      placeholder="Here can be your description"
-                      v-model="user.aboutMe">
-              </textarea>
-          </div>
-        </div>
-      </div> -->
 
       <div class="text-center">
         <button type="submit" class="btn btn-info btn-fill float-right" @click.prevent="createUser">
@@ -133,14 +80,14 @@
           surname: '',
           mail: '',
           pass: '',
-          rol: ''
+          role: ''
         }
       }
     },
     methods: {
       createUser () {
-        alert('Datos del usuario creado: ' + JSON.stringify(this.user));
-        
+
+        // Creamos un usuario con los datos del formulario
         admin.auth().createUser({
           email: this.user.mail,
           password: this.user.pass
@@ -148,31 +95,47 @@
           .then(function(userRecord) {
             // See the UserRecord reference doc for the contents of userRecord.
             console.log("Successfully created new user:", userRecord.uid);
+
+            // Guardamos los datos del usuario en la tabla users.
+            db.firestore().collection("users").doc(this.user.mail).set({
+              name: this.user.name,
+              surname: this.user.surname,
+              mail: this.user.mail,
+              role: this.user.role,
+            })
+            .then(function() {
+                console.log("Document successfully written!");
+            })
+            .catch(function(error) {
+                console.error("Error writing document: ", error);
+                alert('Error al dar de alta el usuario');
+            });
+
+            alert('Se ha creado el usuario ' + JSON.stringify(this.user.name, this.user.surname) + 
+            ' con el correo ' + JSON.stringify(this.user.mail));
+
           })
           .catch(function(error) {
             console.log("Error creating new user:", error);
+            alert('Error al dar de alta el usuario');
           });
 
-        // db.auth().createUserWithEmailAndPassword(this.user.mail, this.user.pass).catch(function(error) {
-        //   // Handle Errors here.
-        //   console.log(error);
-        //   var errorCode = error.code;
-        //   var errorMessage = error.message;
-        //   // ...
+        // Guardamos los datos del usuario en la tabla users.
+        // db.firestore().collection("users").doc(this.user.mail).set({
+        //   name: this.user.name,
+        //   surname: this.user.surname,
+        //   mail: this.user.mail,
+        //   role: this.user.role,
+        // })
+        // .then(function() {
+        //     console.log("Document successfully written!");
+        // })
+        // .catch(function(error) {
+        //     console.error("Error writing document: ", error);
         // });
 
-        db.firestore().collection("users").doc(this.user.mail).set({
-          name: this.user.name,
-          surname: this.user.surname,
-          mail: this.user.mail,
-          rol: this.user.rol,
-        })
-        .then(function() {
-            console.log("Document successfully written!");
-        })
-        .catch(function(error) {
-            console.error("Error writing document: ", error);
-        });
+        document.getElementById("userForm").reset();
+
       },
     }
   }
@@ -180,20 +143,20 @@
 </script>
 <style>
 
-.row{
-  margin-left: 0px;
-  margin-right: 0px;
-  margin-top: 4px;
-}
+  .row{
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 4px;
+  }
 
-.row-select{
-  margin-top: 0px;
-  margin-left: 0px;
-  margin-right: 0px;
-}
+  .row-select{
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+  }
 
-.selectRol{
-  height: 40px;
-}
+  .selectRol{
+    height: 40px;
+  }
 
 </style>

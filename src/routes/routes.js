@@ -2,6 +2,7 @@ import DashboardLayout from '../components/Dashboard/Layout/DashboardLayout.vue'
 // GeneralViews
 import NotFound from '../components/GeneralViews/NotFoundPage.vue'
 import Login from '../components/GeneralViews/Login.vue'
+import CalculateAlerts from '../components/GeneralViews/CalculateAlerts.vue'
 
 // Admin pages
 import Overview from 'src/components/Dashboard/Views/Overview.vue'
@@ -34,8 +35,8 @@ const routes = [
 
           docRef.get().then(function(doc) {
               if (doc.exists) {
-                let rol = doc.data().rol;
-                  if (rol == 'admin'){
+                let role = doc.data().role;
+                  if (role == 'admin'){
                     next('/admin/overview');
                   }
                   else{
@@ -68,8 +69,8 @@ const routes = [
 
           docRef.get().then(function(doc) {
               if (doc.exists) {
-                let rol = doc.data().rol;
-                  if (rol == 'admin'){
+                let role = doc.data().role;
+                  if (role == 'admin'){
                     next();
                   }
                   else{
@@ -134,6 +135,10 @@ const routes = [
         component: Notifications
       }
     ]
+  },
+  { 
+    path:'/api/calculate-alerts',
+    component: CalculateAlerts 
   },
   { path: '*', component: NotFound }
 ]

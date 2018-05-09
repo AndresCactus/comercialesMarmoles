@@ -23,18 +23,19 @@
 </template>
  
 <script>
+import db from '../../firebaseInit'
+import moment from 'moment'
+
 export default {
   name: 'my-component',
-  mounted() {
-  this.$http.headers.common.Authorization = localStorage.token;
-  this.$http.get('http://www.mocky.io/v2/5ae6def92f00001000f05892')
-    .then(response => {
-      if(response.status === 200) {
-        this.rows = response.data;
-      }
-    })
-    .catch(error => {
-      console.console(error)
+  created() {
+    db.firestore().collection('alerts').get().then((querySnapshot) => {
+      this.loading = false
+      querySnapshot.forEach((doc) => {
+        let aux = doc.data();
+        aux.date = moment(String(aux.date)).format('DD/MM/YY');
+        this.rows.push(aux);
+      })
     })
   },
   data(){
@@ -52,7 +53,7 @@ export default {
         },
         {
           label: 'Fecha',
-          field: 'createdAt',
+          field: 'date',
           thClass: 'text-center',
           tdClass: 'text-center',
           filterOptions: {

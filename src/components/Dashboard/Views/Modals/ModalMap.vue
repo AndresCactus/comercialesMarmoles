@@ -39,11 +39,9 @@
           id="modalDescription"
           style="text-align:center;"
         >
-        {{this.lat}}
-        {{this.long}}
-            <slot name="body">
-                <iframe width="100%" height="350" frameborder="0" style="border:0" :src="'https://www.google.com/maps/embed/v1/place?q='+lat+','+long+'&amp;key=AIzaSyDKiR7aTynp6_WAogwFzSeNAgR-AsMm4no'"></iframe>
-            </slot>
+          <slot name="body">
+              <iframe width="100%" height="350" frameborder="0" style="border:0" :src="'https://www.google.com/maps/embed/v1/place?q='+lat+','+long+'&amp;key=AIzaSyDKiR7aTynp6_WAogwFzSeNAgR-AsMm4no'"></iframe>
+          </slot>
         </section>
         <footer class="modal-footer">
           <slot name="footer">

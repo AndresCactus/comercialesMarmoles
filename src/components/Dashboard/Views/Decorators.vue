@@ -11,6 +11,7 @@
 <script>
   import TableData from './Tables/TableData.vue'
   import db from '../../firebaseInit'
+  import moment from 'moment'
 
   export default {
     components: {
@@ -22,10 +23,12 @@
       };
     },
     created () {
-      db.firestore().collection('decorators').get().then((querySnapshot) => {
+      db.firestore().collection('visits').where('role','==','decorators').get().then((querySnapshot) => {
         this.loading = false
         querySnapshot.forEach((doc) => {
-          this.rows.push(doc.data());
+          let aux = doc.data();
+          aux.createdAt = moment(String(aux.createdAt)).format('DD/MM/YY');
+          this.rows.push(aux);
         })
       })
     }
