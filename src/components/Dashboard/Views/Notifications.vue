@@ -27,7 +27,6 @@ import db from '../../firebaseInit'
 import moment from 'moment'
 
 export default {
-  name: 'my-component',
   created() {
     db.firestore().collection('alerts').get().then((querySnapshot) => {
       this.loading = false

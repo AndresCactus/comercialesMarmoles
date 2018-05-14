@@ -86,22 +86,25 @@
     },
     methods: {
       createUser () {
+        var that = this;
 
         // Creamos un usuario con los datos del formulario
         admin.auth().createUser({
-          email: this.user.mail,
-          password: this.user.pass
+          email: that.user.mail,
+          password: that.user.pass
         })
           .then(function(userRecord) {
             // See the UserRecord reference doc for the contents of userRecord.
             console.log("Successfully created new user:", userRecord.uid);
 
+            console.log('paco');
             // Guardamos los datos del usuario en la tabla users.
-            db.firestore().collection("users").doc(this.user.mail).set({
-              name: this.user.name,
-              surname: this.user.surname,
-              mail: this.user.mail,
-              role: this.user.role,
+            db.firestore().collection("users").doc(that.user.mail).set({
+              name: that.user.name,
+              surname: that.user.surname,
+              mail: that.user.mail,
+              role: that.user.role,
+              uid: userRecord.uid
             })
             .then(function() {
                 console.log("Document successfully written!");
@@ -111,28 +114,14 @@
                 alert('Error al dar de alta el usuario');
             });
 
-            alert('Se ha creado el usuario ' + JSON.stringify(this.user.name, this.user.surname) + 
-            ' con el correo ' + JSON.stringify(this.user.mail));
+            alert('Se ha creado el usuario ' + JSON.stringify(that.user.name, that.user.surname) + 
+            ' con el correo ' + JSON.stringify(that.user.mail));
 
           })
           .catch(function(error) {
             console.log("Error creating new user:", error);
             alert('Error al dar de alta el usuario');
           });
-
-        // Guardamos los datos del usuario en la tabla users.
-        // db.firestore().collection("users").doc(this.user.mail).set({
-        //   name: this.user.name,
-        //   surname: this.user.surname,
-        //   mail: this.user.mail,
-        //   role: this.user.role,
-        // })
-        // .then(function() {
-        //     console.log("Document successfully written!");
-        // })
-        // .catch(function(error) {
-        //     console.error("Error writing document: ", error);
-        // });
 
         document.getElementById("userForm").reset();
 

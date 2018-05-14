@@ -58,13 +58,12 @@
           </span>
         </span>
         <span v-else-if="props.column.field == 'position'">
-          <button type="button" class="fa fa-map-marker" @click="showModalMap('Posición de la visita', props.row.lat, props.row.long)">
+          <button type="button" class="fa fa-map-marker" style="font-size:1.5em;" @click="showModalMap('Posición de la visita', props.row.lat, props.row.long)">
           </button>
         </span>
         <span v-else-if="props.column.field == 'notes'">
-          <button type="button" class="fa fa-sticky-note-o" @click="showModal('Notas', props.row.notes)">
+          <button type="button" class="fa fa-sticky-note-o" style="font-size:1.5em" @click="showModal('Notas', props.row.notes)">
           </button>
-
         </span>
         <span v-else>
           {{props.formattedRow[props.column.field]}}
@@ -302,13 +301,13 @@ export default {
 
 <style>
 
-button{
-  padding-bottom: 0;
-  padding-left: 0px;
-  padding-right: 0px;
-  padding-top: 1px;
-  text-align: center;
-  border: 0px;
-}
+  button{
+    padding-bottom: 0;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 1px;
+    text-align: center;
+    border: 0px;
+  }
 
 </style>

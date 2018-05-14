@@ -158,8 +158,6 @@
   import StatsCard from 'src/components/UIComponents/Cards/StatsCard.vue'
   import Card from 'src/components/UIComponents/Cards/Card.vue'
   import Checkbox from 'src/components/UIComponents/Inputs/Checkbox.vue'
-  import index from 'vue';
-  import moment from 'moment'
 
   export default {
     components: {
@@ -361,6 +359,7 @@
           },
           options: {
             seriesBarDistance: 10,
+            onlyInteger: true,
             axisX: {
               showGrid: false
             },

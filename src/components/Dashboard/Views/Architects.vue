@@ -33,18 +33,6 @@
         })
       })
     }
-    // mounted() {
-    //   this.$http.headers.common.Authorization = localStorage.token;
-    //   this.$http.get('http://www.mocky.io/v2/5ae2e5dc3100000e00083c16')
-    //     .then(response => {
-    //       if(response.status === 200) {
-    //         this.rows = response.data;
-    //       }
-    //     })
-    //     .catch(error => {
-    //       console.console(error)
-    //     })
-    // },
   }
 
 </script>
