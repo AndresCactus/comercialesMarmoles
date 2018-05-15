@@ -2,8 +2,7 @@
   <div class="content">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
+        <div class="col-md-12">
           <edit-profile-form>
           </edit-profile-form>
         </div>
@@ -165,6 +164,10 @@
     padding-top: 1px;
     text-align: center;
     border: 0px;
+  }
+
+  .col-md-12{
+    padding: 0px;
   }
 
 </style>
